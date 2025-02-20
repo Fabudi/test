@@ -1,0 +1,27 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="3" author="fab">
+        <insert tableName="catalogs">
+            <column name="id" value="c2b9344b-3dda-4033-9dee-43345d7acbde"/>
+            <column name="name" value="description"/>
+        </insert>
+        <insert tableName="catalogs">
+            <column name="id" value="d07f2e22-8a49-42c5-b80a-c682df877616"/>
+            <column name="name" value="perspective"/>
+        </insert>
+    </changeSet>
+    <changeSet id="4" author="fab">
+        <insert tableName="catalog1">
+            <column name="catalog_id" value="c2b9344b-3dda-4033-9dee-43345d7acbde"/>
+            <column name="amount" value="42"/>
+            <column name="description" value="Lorem ipsum dolores" />
+        </insert>
+        <insert tableName="catalog1">
+            <column name="catalog_id" value="c2b9344b-3dda-4033-9dee-43345d7acbde"/>
+            <column name="amount" value="42"/>
+            <column name="description" value="Lorem ipsum" />
+        </insert>
+    </changeSet>
+</databaseChangeLog>
