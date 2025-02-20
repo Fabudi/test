@@ -1,6 +1,5 @@
 package inc.fabudi.test.model;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,10 +23,10 @@ public class Catalog1Entry {
     private Catalog catalog;
 
     @Column(columnDefinition = "amount", nullable = false)
-    private JsonNode amount;
+    private Integer amount;
 
     @Column(columnDefinition = "description", nullable = false)
-    private JsonNode description;
+    private String description;
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
