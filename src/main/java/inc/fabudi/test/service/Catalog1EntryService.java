@@ -32,18 +32,21 @@ public class Catalog1EntryService {
         return entryRepository.findById(entryId).map(Catalog1EntryMapper::toDTO).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Entry not found"));
     }
 
-    public Catalog1EntryDTO addEntry(Catalog1EntryDTO data) {
-        Catalog1Entry entry = entryRepository.save(Catalog1EntryMapper.toEntity(data));
+    public Catalog1EntryDTO addEntry(UUID catalogId, Catalog1EntryDTO data) {
+        Catalog1Entry entry = Catalog1EntryMapper.toEntity(data);
+        entry.setCatalog(catalogRepository.findById(catalogId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Catalog not found")));
+        entry = entryRepository.save(entry);
+        log.info("Adding entry with ID: {}", entry.getId());
         return Catalog1EntryMapper.toDTO(entry);
     }
 
-    public Catalog1EntryDTO updateEntry(Catalog1EntryDTO updatedEntry) {
-        log.info("Updating entry with ID: {}", updatedEntry.getId());
-        return entryRepository.findById(updatedEntry.getId()).map(entry -> {
+    public Catalog1EntryDTO updateEntry(UUID entryId, Catalog1EntryDTO updatedEntry) {
+        log.info("Updating entry with ID: {}", entryId);
+        return entryRepository.findById(entryId).map(entry -> {
             entry.setAmount(updatedEntry.getAmount());
             entry.setDescription(updatedEntry.getDescription());
             Catalog1Entry savedEntry = entryRepository.save(entry);
-            log.info("Entry with ID: {} saved", updatedEntry.getId());
+            log.info("Entry with ID: {} saved", entryId);
             return Catalog1EntryMapper.toDTO(savedEntry);
         }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Entry not found"));
     }

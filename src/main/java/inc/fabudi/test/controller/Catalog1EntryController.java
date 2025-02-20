@@ -19,13 +19,13 @@ public class Catalog1EntryController {
     }
 
     @PostMapping
-    public Catalog1EntryDTO addEntry(@RequestBody Catalog1EntryDTO entry) {
-        return entryService.addEntry(entry);
+    public Catalog1EntryDTO addEntry(@PathVariable UUID catalogId, @RequestBody Catalog1EntryDTO entry) {
+        return entryService.addEntry(catalogId, entry);
     }
 
     @PutMapping("/{entryId}")
-    public Catalog1EntryDTO updateEntry(@RequestBody Catalog1EntryDTO entry) {
-        return entryService.updateEntry(entry);
+    public Catalog1EntryDTO updateEntry(@PathVariable UUID entryId, @RequestBody Catalog1EntryDTO entry) {
+        return entryService.updateEntry(entryId, entry);
     }
 
     @DeleteMapping("/{entryId}")
